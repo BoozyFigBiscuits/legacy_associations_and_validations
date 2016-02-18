@@ -6,6 +6,7 @@ class Lesson < ActiveRecord::Base
   scope :without_night_assignments, -> { where("night_assignment_id IS NULL") }
 
   has_many :readings, dependent: :destroy
+  belongs_to :course
 
   def self.linked_to_assignment(assignment)
     found_lesson = where(pre_class_assignment_id: assignment.id).first

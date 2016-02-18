@@ -34,5 +34,13 @@ class ApplicationTest < Minitest::Test
     assert Reading.where(id: r.id).empty?
   end
 
+  def test_lessons_delete_with_course
+    c = Course.create(name: "Ruby")
+    l = Lesson.create(name: "Rails")
+    c.lessons << l
+    assert_equal [l], c.lessons
+    c.destroy
+    assert Lesson.where(id: l.id).empty?
+  end
 
 end

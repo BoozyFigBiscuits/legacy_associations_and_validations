@@ -45,13 +45,20 @@ class ApplicationTest < Minitest::Test
     rescue
     end
   end
+
+  def test_associate_courses_with_course_students_do_not_destroy_dependents
+    a = Course.create(name: "Ruby on Rails")
+    b = CourseStudent.create(student_id: 123)
+    a.course_students << b
+    assert_equal [b], a.course_students
+    begin
+    a.destroy
+    assert CourseStudent.where(id: b.id).empty?
+    rescue
+    end
+  end
 end
 
-
-
-
-
-# Associate terms with courses (both directions). If a term has any courses associated with it, the term should not be deletable.
 # Associate courses with course_students (both directions). If the course has any students associated with it, the course should not be deletable.
 # Associate assignments with courses (both directions). When a course is destroyed, its assignments should be automatically destroyed.
 # Associate lessons with their pre_class_assignments (both directions).

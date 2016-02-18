@@ -40,8 +40,8 @@ class ApplicationTest < Minitest::Test
     a.courses << b
     assert_equal [b], a.courses
     begin
-    a.destroy
-    assert Course.where(id: b.id).empty?
+      a.destroy
+      assert Course.where(id: b.id).empty?
     rescue
     end
   end
@@ -52,15 +52,24 @@ class ApplicationTest < Minitest::Test
     a.course_students << b
     assert_equal [b], a.course_students
     begin
-    a.destroy
-    assert CourseStudent.where(id: b.id).empty?
+      a.destroy
+      assert CourseStudent.where(id: b.id).empty?
     rescue
+    end
+  end
+
+  def test_associate_assignments_with_courses
+    a = Course.create(name: "Ruby on Rails")
+    b = Assignment.create(name: "Blackjack Advisor")
+    a.assignments << b
+    assert_equal [b], a.assignments
+    begin
+      a.destroy
+      assert Assignment.where(id: b.id).empty?
     end
   end
 end
 
-# Associate courses with course_students (both directions). If the course has any students associated with it, the course should not be deletable.
-# Associate assignments with courses (both directions). When a course is destroyed, its assignments should be automatically destroyed.
 # Associate lessons with their pre_class_assignments (both directions).
 # Set up a School to have many courses through the school's terms.
 # Validate that Lessons have names.

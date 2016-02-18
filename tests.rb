@@ -43,4 +43,15 @@ class ApplicationTest < Minitest::Test
     assert Lesson.where(id: l.id).empty?
   end
 
+  def test_courses_cant_delete_if_has_course_instructors
+    c = Course.create(name: "Ruby")
+    ci = CourseInstructor.create!(instructor_id: 10)
+    c.course_instructors << ci
+    assert_equal [ci], c.course_instructors
+    begin
+    c.destroy
+    rescue
+    end
+    refute Course.where(id: c.id).empty?
+  end
 end

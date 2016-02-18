@@ -25,4 +25,14 @@ class ApplicationTest < Minitest::Test
     assert true
   end
 
+  def test_readings_delete_with_lessons
+    l = Lesson.create(name: "Lemons")
+    r = Reading.create(caption: "Rider")
+    l.readings << r
+    assert_equal [r], l.readings
+    l.destroy
+    assert Reading.where(id: r.id).empty?
+  end
+
+
 end

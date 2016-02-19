@@ -5,8 +5,9 @@ class Reading < ActiveRecord::Base
   scope :pre, -> { where("before_lesson = ?", true) }
   scope :post, -> { where("before_lesson != ?", true) }
 
-  belongs_to :lessons
-  
+  belongs_to :lesson
+  has_many :courses, :through => :lessons
+
   def clone
     dup
   end

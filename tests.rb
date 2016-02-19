@@ -54,4 +54,22 @@ class ApplicationTest < Minitest::Test
     end
     refute Course.where(id: c.id).empty?
   end
+
+  def test_lessons_with_inclass_assignments
+    skip
+    l = Lesson.create(name: "Lemons")
+    l.in_class_assignment_id = 13
+    assert 13, l.in_class_assignment_id
+  end
+
+  def test_readings_through_lessons
+    c = Course.create(name: "Ruby")
+    l = Lesson.create(name: "Lemons")
+    r = Reading.create(caption: "Today's Reading")
+    r2 = Reading.create(caption: "Tomorrow's Reading")
+    l.readings << r
+    l.readings << r2
+    c.lessons << l
+    assert_equal c.readings, [r, r2]
+  end
 end

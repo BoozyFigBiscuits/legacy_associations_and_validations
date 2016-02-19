@@ -7,6 +7,7 @@ class Lesson < ActiveRecord::Base
 
   has_many :readings, dependent: :destroy
   belongs_to :course
+  has_many :in_class_assignments, class_name: "Lesson", foreign_key: "in_class_assignment_id"
 
   def self.linked_to_assignment(assignment)
     found_lesson = where(pre_class_assignment_id: assignment.id).first

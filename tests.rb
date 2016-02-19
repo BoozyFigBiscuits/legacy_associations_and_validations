@@ -1,6 +1,7 @@
 # Basic test requires
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'byebug'
 
 # Include both the migration and the app itself
 require './migration'
@@ -50,11 +51,8 @@ class ApplicationTest < Minitest::Test
     ci = CourseInstructor.create(instructor_id: 10)
     c.course_instructors << ci
     assert_equal [ci], c.course_instructors
-    begin
     c.destroy
-    rescue
-    end
-    refute Course.where(id: ci.id).empty?
+    refute CourseInstructor.where(id: ci.id).empty?
   end
 
   def test_lessons_with_inclass_assignments

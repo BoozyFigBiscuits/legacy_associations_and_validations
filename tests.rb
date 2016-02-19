@@ -69,8 +69,12 @@ class ApplicationTest < Minitest::Test
     end
   end
 
-  # def test_associate_lessons_with_preclass_assignments
-  # end
+  def test_associate_lessons_with_preclass_assignments
+    a = Assignment.create(name: "Legacy Code")
+    b = Lesson.create(name: "Associations and Validations")
+    b.pre_class_assignment = a
+    assert_equal a, b.pre_class_assignment
+  end
 
   def test_set_up_a_school
     a = School.create(name: "Iron Yard")
@@ -80,12 +84,15 @@ class ApplicationTest < Minitest::Test
     c.courses << b
     assert_equal [b], a.courses
   end
-
+  
   def test_lessons_have_names
     a = Lesson.create(course_id: 123)
     refute a.valid?
   end
 
+  # def test_readings_have_order_number_lesson_id_url
+  #   a = Reading.create()
+  # end
 
 
 
@@ -93,7 +100,7 @@ end
 
 # Associate lessons with their pre_class_assignments (both directions).
 
-# Validate that Lessons have names.
+#
 # Validate that Readings must have an order_number, a lesson_id, and a url.
 # Validate that the Readings url must start with http:// or https://. Use a regular expression.
 # Validate that Courses have a course_code and a name.

@@ -1,6 +1,7 @@
 class Lesson < ActiveRecord::Base
   validates :name, presence: true
   delegate :code_and_name, to: :course, prefix: true
+  belongs_to :pre_class_assignment, class_name: "Assignment", foreign_key: "pre_class_assignment_id"
 
   scope :roots, -> { where("parent_lesson_id IS NULL") }
   scope :without_day_assignments, -> { where("day_assignment_id IS NULL") }

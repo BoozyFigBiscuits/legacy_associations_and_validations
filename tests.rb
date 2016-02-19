@@ -98,4 +98,9 @@ class ApplicationTest < Minitest::Test
     u = User.create(first_name: "Damian", last_name: "House", email: "damianhouse@gmail")
     refute u.valid?
   end
+
+  def test_validates_user_photo_url_is_in_correct_format
+    u = User.create(first_name: "Lyly", last_name: "Galarza", email: "lylygalarza@gmail.com", photo_url: "www.facebook.com")
+    refute u.valid?
+  end
 end

@@ -76,14 +76,14 @@ class ApplicationTest < Minitest::Test
     assert_equal a, b.pre_class_assignment
   end
 
-  # def test_set_up_a_school
-  #   a = School.create(name: "Iron Yard")
-  #   b = Course.create(name: "Ruby on Rails")
-  #   c = Term.create(name: "Spring Semester")
-  #   a.terms << c
-  #   c.courses << b
-  #   assert_equal [b], a.courses
-  # end
+  def test_set_up_a_school
+    a = School.create(name: "Iron Yard")
+    b = Course.create(name: "Ruby on Rails", course_code: 123)
+    c = Term.create(name: "Spring Semester")
+    a.terms << c
+    c.courses << b
+    assert_equal [b], a.courses
+  end
 
   def test_lessons_have_names
     a = Lesson.create(course_id: 123)
@@ -105,12 +105,13 @@ class ApplicationTest < Minitest::Test
     refute a.valid?
   end
 
+  def test_validate_course_code_unique_within_term_id
+    a = Course.create(term_id: 1, course_code: 2)
+    b = Course.create(term_id: 1, course_code: 2)
+    refute b.valid?
+  end
+
 end
 
-
-#
-#
-#
-# Validate that Courses have a course_code and a name.
 # Validate that the course_code is unique within a given term_id.
 # Validate that the course_code starts with three letters and ends with three numbers. Use a regular expression.

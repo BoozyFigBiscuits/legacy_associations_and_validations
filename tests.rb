@@ -87,4 +87,10 @@ class ApplicationTest < Minitest::Test
     u = User.create()
     refute u.valid?
   end
+
+  def test_user_email_is_unique
+    u = User.create(first_name: "Damian", last_name: "House", email: "damianhouse@gmail.com")
+    u2 = User.create(first_name: "Damian", last_name: "House", email: "damianhouse@gmail.com")
+    refute u2.valid?
+  end
 end

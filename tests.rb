@@ -72,4 +72,9 @@ class ApplicationTest < Minitest::Test
     c.lessons << l
     assert_equal c.readings, [r, r2]
   end
+
+  def test_school_name_validation
+    s = School.create()
+    refute s.valid?
+  end
 end

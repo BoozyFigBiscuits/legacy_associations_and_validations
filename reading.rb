@@ -1,4 +1,8 @@
 class Reading < ActiveRecord::Base
+  validates_format_of :url, :with => /\A(http|https):\/\//i
+  validates :order_number, presence: true
+  validates :url, presence: true
+  validates :lesson_id, presence: true
 
   default_scope { order('order_number') }
 

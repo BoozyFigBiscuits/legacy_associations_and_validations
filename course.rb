@@ -1,4 +1,14 @@
 class Course < ActiveRecord::Base
+  belongs_to :term
+  belongs_to :school
+  has_many :course_students, dependent: :restrict_with_exception
+  has_many :assignments, dependent: :destroy
+  validates :course_code, presence: true, uniqueness: {:scope => :term_id}
+  validates_format_of :course_code, :with => /\D\D\D\d\d\d/i
+  validates :name, presence: true
+  has_many :lessons, dependent: :destroy
+  has_many :course_instructors, dependent: :restrict_with_error
+  has_many :readings, :through => :lessons
 
   default_scope { order("courses.term_id DESC, courses.course_code, courses.id DESC") }
 
@@ -10,9 +20,7 @@ class Course < ActiveRecord::Base
   delegate :starts_on, to: :term, prefix: true
   delegate :ends_on, to: :term, prefix: true
 
-  has_many :lessons, dependent: :destroy
-  has_many :course_instructors, dependent: :restrict_with_error
-  has_many :readings, :through => :lessons
+
 
   def self.example_courses
     self.where(public: true).order("id DESC").first(5)

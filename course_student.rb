@@ -1,4 +1,5 @@
 class CourseStudent < ActiveRecord::Base
+  belongs_to :course, dependent: :destroy
 
   scope :approved, -> { where(approved: true) }
   scope :unapproved, -> { where(approved: false) }

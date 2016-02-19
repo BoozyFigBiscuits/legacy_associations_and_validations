@@ -103,4 +103,9 @@ class ApplicationTest < Minitest::Test
     u = User.create(first_name: "Lyly", last_name: "Galarza", email: "lylygalarza@gmail.com", photo_url: "www.facebook.com")
     refute u.valid?
   end
+
+  def test_validates_assignments_have_course_id_name_and_percent_of_grade
+    a = Assignment.create(name: "Apples")
+    refute a.valid?
+  end
 end

@@ -68,6 +68,18 @@ class ApplicationTest < Minitest::Test
       assert Assignment.where(id: b.id).empty?
     end
   end
+
+  # def test_associate_lessons_with_preclass_assignments
+  # end
+
+  def test_set_up_a_school
+    a = School.create(name: "Iron Yard")
+    b = Course.create(name: "Ruby on Rails")
+    c = Term.create(name: "Spring Semester")
+    a.terms << c
+    c.courses << b
+    assert_equal [b], a.courses
+  end
 end
 
 # Associate lessons with their pre_class_assignments (both directions).

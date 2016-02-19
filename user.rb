@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create
-
+  validates_format_of :photo_url, :with => /A(http|https):\/\//, :on => :create
   def full_name
     "#{title + " " if title}#{first_name} #{padded_middle_initial}#{last_name}"
   end

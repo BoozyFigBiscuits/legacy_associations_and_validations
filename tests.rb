@@ -117,5 +117,3 @@ class ApplicationTest < Minitest::Test
   end
 
 end
-
-# Validate that the course_code starts with three letters and ends with three numbers. Use a regular expression.

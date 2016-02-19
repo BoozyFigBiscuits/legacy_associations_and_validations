@@ -77,4 +77,9 @@ class ApplicationTest < Minitest::Test
     s = School.create()
     refute s.valid?
   end
+
+  def test_name_starts_on_ends_on_and_school_id_for_terms_validation
+    t = Term.create()
+    refute t.valid?
+  end
 end

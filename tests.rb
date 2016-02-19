@@ -91,7 +91,7 @@ class ApplicationTest < Minitest::Test
   end
 
   def test_readings_have_order_number_lesson_id_url
-    a = Reading.create()
+    a = Reading.create(caption: "blah")
     refute a.valid?
   end
 
@@ -100,17 +100,17 @@ class ApplicationTest < Minitest::Test
     refute a.valid?
   end
 
-  # def test_validate_courses_have_course_code_and_name
-  #   a = Course.create(instructor_name: "Mason Matthews")
-  #   refute a.valid?
-  # end
+  def test_validate_courses_have_course_code_and_name
+    a = Course.create(color: "Figgy")
+    refute a.valid?
+  end
 
 end
 
 
 #
 #
-# Validate that the Readings url must start with http:// or https://. Use a regular expression.
+#
 # Validate that Courses have a course_code and a name.
 # Validate that the course_code is unique within a given term_id.
 # Validate that the course_code starts with three letters and ends with three numbers. Use a regular expression.

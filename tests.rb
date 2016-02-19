@@ -80,10 +80,19 @@ class ApplicationTest < Minitest::Test
     c.courses << b
     assert_equal [b], a.courses
   end
+
+  def test_lessons_have_names
+    a = Lesson.create(course_id: 123)
+    refute a.valid?
+  end
+
+
+
+
 end
 
 # Associate lessons with their pre_class_assignments (both directions).
-# Set up a School to have many courses through the school's terms.
+
 # Validate that Lessons have names.
 # Validate that Readings must have an order_number, a lesson_id, and a url.
 # Validate that the Readings url must start with http:// or https://. Use a regular expression.

@@ -56,10 +56,10 @@ class ApplicationTest < Minitest::Test
   end
 
   def test_lessons_with_inclass_assignments
-    skip
     l = Lesson.create(name: "Lemons")
-    l.in_class_assignment_id = 13
-    assert 13, l.in_class_assignment_id
+    ica = Assignment.create(name: "Apples")
+    l.in_class_assignment = ica
+    assert_equal ica, l.in_class_assignment
   end
 
   def test_readings_through_lessons
@@ -92,5 +92,10 @@ class ApplicationTest < Minitest::Test
     u = User.create(first_name: "Damian", last_name: "House", email: "damianhouse@gmail.com")
     u2 = User.create(first_name: "Damian", last_name: "House", email: "damianhouse@gmail.com")
     refute u2.valid?
+  end
+
+  def test_validates_user_email_in_correct_form
+    u = User.create(first_name: "Damian", last_name: "House", email: "damianhouse@gmail")
+    refute u.valid?
   end
 end

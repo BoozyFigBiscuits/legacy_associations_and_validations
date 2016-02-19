@@ -78,7 +78,7 @@ class ApplicationTest < Minitest::Test
 
   def test_set_up_a_school
     a = School.create(name: "Iron Yard")
-    b = Course.create(name: "Ruby on Rails", course_code: 123)
+    b = Course.create(name: "Ruby on Rails", course_code: "ABC123")
     c = Term.create(name: "Spring Semester")
     a.terms << c
     c.courses << b
@@ -111,7 +111,11 @@ class ApplicationTest < Minitest::Test
     refute b.valid?
   end
 
+  def test_validate_course_code_with_regex
+    a = Course.create(course_code: "123ABC", name: "Ruby on Rails")
+    refute a.valid?
+  end
+
 end
 
-# Validate that the course_code is unique within a given term_id.
 # Validate that the course_code starts with three letters and ends with three numbers. Use a regular expression.

@@ -76,14 +76,14 @@ class ApplicationTest < Minitest::Test
     assert_equal a, b.pre_class_assignment
   end
 
-  def test_set_up_a_school
-    a = School.create(name: "Iron Yard")
-    b = Course.create(name: "Ruby on Rails")
-    c = Term.create(name: "Spring Semester")
-    a.terms << c
-    c.courses << b
-    assert_equal [b], a.courses
-  end
+  # def test_set_up_a_school
+  #   a = School.create(name: "Iron Yard")
+  #   b = Course.create(name: "Ruby on Rails")
+  #   c = Term.create(name: "Spring Semester")
+  #   a.terms << c
+  #   c.courses << b
+  #   assert_equal [b], a.courses
+  # end
 
   def test_lessons_have_names
     a = Lesson.create(course_id: 123)
@@ -91,14 +91,25 @@ class ApplicationTest < Minitest::Test
   end
 
   def test_readings_have_order_number_lesson_id_url
-    a = Reading.create(caption: "Imposter Syndrome")
+    a = Reading.create()
     refute a.valid?
   end
+
+  def test_validate_specific_reading_url
+    a = Reading.create(order_number: 123, lesson_id: 456, url: "www.yahoo.com")
+    refute a.valid?
+  end
+
+  # def test_validate_courses_have_course_code_and_name
+  #   a = Course.create(instructor_name: "Mason Matthews")
+  #   refute a.valid?
+  # end
+
 end
 
 
 #
-# Validate that Readings must have an order_number, a lesson_id, and a url.
+#
 # Validate that the Readings url must start with http:// or https://. Use a regular expression.
 # Validate that Courses have a course_code and a name.
 # Validate that the course_code is unique within a given term_id.

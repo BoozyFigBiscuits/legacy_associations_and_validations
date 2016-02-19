@@ -84,21 +84,18 @@ class ApplicationTest < Minitest::Test
     c.courses << b
     assert_equal [b], a.courses
   end
-  
+
   def test_lessons_have_names
     a = Lesson.create(course_id: 123)
     refute a.valid?
   end
 
-  # def test_readings_have_order_number_lesson_id_url
-  #   a = Reading.create()
-  # end
-
-
-
+  def test_readings_have_order_number_lesson_id_url
+    a = Reading.create(caption: "Imposter Syndrome")
+    refute a.valid?
+  end
 end
 
-# Associate lessons with their pre_class_assignments (both directions).
 
 #
 # Validate that Readings must have an order_number, a lesson_id, and a url.

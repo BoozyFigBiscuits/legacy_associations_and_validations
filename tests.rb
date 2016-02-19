@@ -82,4 +82,9 @@ class ApplicationTest < Minitest::Test
     t = Term.create()
     refute t.valid?
   end
+
+  def test_user_first_name_last_name_and_email_validation
+    u = User.create()
+    refute u.valid?
+  end
 end

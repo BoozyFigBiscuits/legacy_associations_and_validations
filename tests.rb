@@ -108,4 +108,13 @@ class ApplicationTest < Minitest::Test
     a = Assignment.create(name: "Apples")
     refute a.valid?
   end
+
+  def test_validates_assignments_have_unique_name_per_course_id
+
+    a = Assignment.create(name: "Apples", course_id: 21, percent_of_grade: 100)
+    a2 = Assignment.create(name: "Apples", course_id: 21, percent_of_grade: 100)
+    a3 = Assignment.create(name: "Apples", course_id: 30, percent_of_grade: 100)
+    refute a2.valid?
+    assert a3.valid?
+  end
 end

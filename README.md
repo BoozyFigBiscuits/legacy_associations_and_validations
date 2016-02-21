@@ -15,4 +15,4 @@ A database to help schools organize courses, instructors, students and more. Use
     ICA = Assignment.create(name: "Apples")
     L.in_class_assignment = ICA
 ```
-The database can keep track of a lesson's in-class assignments. 
+The database can keep track of a lesson's in-class assignments.

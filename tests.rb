@@ -119,13 +119,13 @@ class ApplicationTest < Minitest::Test
 
   def test_associate_terms_and_schools
     a = School.create(name: "Iron Yard")
-    b = Term.create(name: "Spring Semester")
+    b = Term.create(name: "Spring Semester", starts_on: Time.new(2016,12,30).to_date, ends_on: Time.new(2016,12,31).to_date)
     a.terms << b
     assert_equal [b], a.terms
-  end
+    end
 
   def test_associate_terms_with_courses_do_not_destroy_dependents
-    a = Term.create(name: "Spring Semester")
+    a = Term.create(name: "Spring Semester", starts_on: Time.new(2016,12,30).to_date, ends_on: Time.new(2016,12,31).to_date)
     b = Course.create(name: "Ruby on Rails")
     a.courses << b
     assert_equal [b], a.courses

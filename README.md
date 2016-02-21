@@ -9,7 +9,7 @@ A database to help schools organize courses, instructors, students and more. Use
 * Utilize TDD to add functionality and make sure it's functioning.
 * Resolve merge conflicts.
 
-##Usage
+## Usage
 ```ruby
     L = Lesson.create(name: "Lemons")
     ICA = Assignment.create(name: "Apples")

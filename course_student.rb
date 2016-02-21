@@ -8,6 +8,8 @@ class CourseStudent < ActiveRecord::Base
   delegate :full_name, :first_name, :last_name, :email, to: :student
   delegate :grading_method, to: :course
 
+
+
   def awarded_achievement_for(achievement)
     if achievement
       awarded_achievements.where(achievement_id: achievement.id).first
